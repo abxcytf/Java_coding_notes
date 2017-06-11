@@ -50,4 +50,52 @@ public class Solution {
         }
         return map.get(head);
     }
+    
+    
+    /********************************************************************************************************/
+    //if we can change the input, we can save the extra space to solve this question
+    //optimized solution, time complexity O(n), space complexity O(1)
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) {
+            return null;
+        }
+        //1th pass: copy next;
+        copyNext(head);
+        //2nd pass: copy random
+        copyRandom(head);
+        //3rd pass: Split linkedlist
+        return splitList(head);
+    }
+    //copy next
+    private void copyNext(RandomListNode head) {
+        while (head != null) {
+            RandomListNode newNode = new RandomListNode(head.label);
+            newNode.random = head.random;
+            newNode.next = head.next;
+            head.next = newNode;
+            head = head.next.next;
+        }
+    }
+    //copy random
+    private void copyRandom(RandomListNode head) {
+        while (head != null) {
+            if (head.next.random != null) {
+                head.next.random = head.random.next; //copied node.next
+            }
+            head = head.next.next;
+        }
+    }
+    //split
+    private RandomListNode splitList(RandomListNode head) {
+        RandomListNode newHead = head.next;
+        while (head != null) {
+            RandomListNode temp = head.next;
+            head.next = temp.next;
+            if (temp.next != null) {
+                temp.next = temp.next.next;
+            }
+            head = head.next;
+        }
+        return newHead;
+    }
 }
