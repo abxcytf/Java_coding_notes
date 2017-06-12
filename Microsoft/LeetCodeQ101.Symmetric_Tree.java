@@ -29,6 +29,41 @@ Bonus points if you could solve it both recursively and iteratively.
  * }
  */
 public class Solution {
+    
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Deque<TreeNode> queue = new LinkedList<>();
+        if (root.left == null || root.right == null) {
+            return root.left == root.right;
+        }
+        queue.offerLast(root.left);
+        queue.offerLast(root.right);
+        while (!queue.isEmpty()) {
+            TreeNode left = queue.pollFirst();
+            TreeNode right = queue.pollFirst();
+            if (left.val != right.val) {
+                return false;
+            }
+            if (left.left == null && right.right != null || left.left != null && right.right == null) {
+                return false;
+            } else if (left.left != null && right.right != null) {
+                queue.offerLast(left.left);
+                queue.offerLast(right.right);
+            }
+            
+            if (left.right != null && right.left == null || left.right == null && right.left != null) {
+                return false;
+            } else if (left.right != null && right.left != null) {
+                queue.offerLast(left.right);
+                queue.offerLast(right.left);
+            }
+        }
+        return true;
+    }
+    
+    /***************************************************************************************/
     //iterative, using queue
     public boolean isSymmetric(TreeNode root) {
         if (root == null) {
