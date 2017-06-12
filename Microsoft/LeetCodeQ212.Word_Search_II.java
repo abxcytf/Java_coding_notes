@@ -57,6 +57,7 @@ public class Solution {
             return result;
         }
         //build the trieTree
+        //用trie树的意义在于可以在O(1)时间内在String[]中找到是否有这个char通过单词顺序
         TrieNode root = buildTree(words);
         
         //dfs search the Trie Tree
