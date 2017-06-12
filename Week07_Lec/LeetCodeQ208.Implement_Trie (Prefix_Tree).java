@@ -149,3 +149,72 @@ public class Trie {
         return true;
     }
 }
+
+/************************************************************************************************************************/
+//TrieNode array version
+public class Trie {
+    class TrieNode {
+        public TrieNode[] children;
+        public boolean hasWord;
+        
+        public TrieNode() {
+            children = new TrieNode[26];
+            hasWord = false;
+        }
+    }
+    
+    private TrieNode root;
+    
+    /** Initialize your data structure here. */
+    public Trie() {
+        root = new TrieNode();
+    }
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        if (word == null || word.length() == 0) {
+            return;
+        }
+        TrieNode current = root;
+        for (char ch : word.toCharArray()) {
+            int index = ch - 'a';
+            if (current.children[index] == null) {
+                current.children[index] = new TrieNode();
+            }
+            current = current.children[index];
+        }
+        current.hasWord = true;
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        if (word == null || word.length() == 0) {
+            return false;
+        }
+        TrieNode current = root;
+        for (char ch : word.toCharArray()) {
+            int index = ch - 'a';
+            if (current.children[index] == null) {
+                return false;
+            }
+            current = current.children[index];
+        }
+        return current.hasWord;
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        if (prefix == null || prefix.length() == 0) {
+            return false;
+        }
+        TrieNode current = root;
+        for (char ch : prefix.toCharArray()) {
+            int index = ch - 'a';
+            if (current.children[index] == null) {
+                return false;
+            }
+            current = current.children[index];
+        }
+        return true;
+    }
+}
