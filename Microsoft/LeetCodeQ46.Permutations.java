@@ -15,7 +15,55 @@ For example,
 */
 
 public class Solution {
-    public List<List<Integer>> permute(int[] nums) {
+  
+  //brutal force
+  public List<List<Integer>> permute(int[] nums) {
+      List<List<Integer>> result = new ArrayList<>();
+      if (nums == null || nums.length == 0) {
+          return result;
+      }
+      Arrays.sort(nums);
+      result.add(new ArrayList<Integer>());
+      for(int i = 0; i < nums.length; i++) {
+          List<List<Integer>> newResult = new ArrayList<>();
+          for (int j = 0; j <= i; j++) {
+              for (List<Integer> list : result) {
+                  List<Integer> newList = new ArrayList<>(list);
+                  newList.add(j, nums[i]);
+                  newResult.add(newList);
+              }
+          }
+          result = newResult;
+       }
+       return result;
+   }
+  
+  /*****************************************************************************************************************/
+  //brutal force
+  public List<List<Integer>> permute(int[] nums) {
+      List<List<Integer>> result = new ArrayList<>();
+      if (nums == null || nums.length == 0) {
+          return result;
+      }
+      Arrays.sort(nums);
+      result.add(new ArrayList<Integer>());
+      for (int i = 0; i < nums.length; i++) {
+          List<List<Integer>> newResult = new ArrayList<>();
+          for (List<Integer> list : result) {
+              for (int j = 0; j <= i; j++) {
+                  List<Integer> newList = new ArrayList<>(list);
+                  newList.add(j, nums[i]);
+                  newResult.add(newList);   
+              }
+          }
+          result = newResult;
+      }
+      return result;
+  }
+  
+  /*****************************************************************************************************************/
+  //DFS
+  public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if (nums == null || nums.length == 0) {
             return result;
