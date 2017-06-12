@@ -69,8 +69,9 @@ public class Solution {
         if (root == null) {
             return true;
         }
-        //Deque<TreeNode> queue = new LinkedList<>();
-        //这里不能用deque因为deque不能放null
+        //Deque<TreeNode> queue = new LinkedList<>(); //working
+        //Deque<TreeNode> queue = new ArrayDeque<>(); //not working!!!!!!!
+        //这里不能用ArrayDeque因为ArrayDeque不能放null,会出现nullPointerException
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root.left);
         queue.offer(root.right);
