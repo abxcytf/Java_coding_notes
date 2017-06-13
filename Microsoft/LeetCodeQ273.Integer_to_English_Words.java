@@ -37,13 +37,13 @@ public class Solution {
     
     //convert the number less than 1000
     private String helper(int num) {
-        if (num == 0) {
+        if (num == 0) { // 0
             return "";
-        } else if (num < 20) {
+        } else if (num < 20) { //(0, 20) 
             return LESS_THAN_20[num] + " ";
-        } else if (num < 100) {
+        } else if (num < 100) { //[20, 100)
             return TENS[num / 10] + " " + helper(num % 10); 
-        } else {
+        } else { //[100, 999)
             return LESS_THAN_20[num / 100] + " Hundred " + helper(num % 100);
         }
     }
