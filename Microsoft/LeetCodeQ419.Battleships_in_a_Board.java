@@ -25,8 +25,38 @@ Could you do it in one-pass, using only O(1) extra memory and without modifying 
 */
 
 public class Solution {
-
+    //DFS dyeing染色 implementation by modifying the input array
+    public int countBattleships(char[][] board) {
+        if (board == null || board.length == 0 || board[0].length == 0) {
+            return 0;
+        }
+        int m = board.length;
+        int n = board[0].length;
+        int count = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == 'X') {
+                    helper(board, i, j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
     
+    private int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    
+    private void helper(char[][] board, int i, int j) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != 'X') {
+            return;
+        }
+        board[i][j] = '.';
+        for (int[] dir : dirs) {
+            int x = i + dir[0];
+            int y = j + dir[1];
+            helper(board, x, y);
+        }
+    }
     
     /************************************************************************************/
     //optimized solution, for follow up, O(1) space
