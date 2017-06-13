@@ -33,7 +33,70 @@ Your serialize and deserialize algorithms should be stateless.
  *     TreeNode(int x) { val = x; }
  * }
  */
+//level order implementation
+public class Codec {
+    private static final String spliter = ",";
+    private static final String NN = "#";
+    
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        if (root == null) {
+            return NN + spliter;
+        } else {
+            sb.append(root.val).append(spliter);
+        }
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offerLast(root);
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.pollFirst();
+            if (current.left != null) {
+                sb.append(current.left.val).append(spliter);
+                queue.offerLast(current.left);
+            } else {
+                sb.append(NN).append(spliter);
+            }
+            if (current.right != null) {
+                sb.append(current.right.val).append(spliter);
+                queue.offerLast(current.right);
+            } else {
+                sb.append(NN).append(spliter);
+            }
+        }
+        return sb.toString();
+    } 
 
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        String[] values = data.split(spliter);
+        int index = 0;
+        TreeNode root = generateNode(values[index++]);
+        Deque<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.offerLast(root);
+        }
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.pollFirst();
+            current.left = generateNode(values[index++]);
+            current.right = generateNode(values[index++]);
+            if (current.left != null) {
+                queue.offerLast(current.left);
+            }
+            if (current.right != null) {
+                queue.offerLast(current.right);
+            }
+        }
+        return root;
+    }
+    
+    private TreeNode generateNode(String s) {
+        if (s.equals(NN)) {
+            return null;
+        } else {
+            return new TreeNode(Integer.valueOf(s));
+        }
+    }
+}
 
 /************************************************************************************/
 //preorder implementation
