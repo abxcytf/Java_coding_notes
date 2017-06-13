@@ -27,6 +27,15 @@ public class Solution {
            public int compare(Interval a, Interval b) {
                return a.start - b.start;
            }
+            /*a.start - b.start is short for
+            if (a.start < b.start) {
+                return -1;
+            } else if (a.start > b.start) {
+                return 1;
+            } else {
+                return 0;
+            }
+            */
         });
         
         Interval current = intervals[0];
