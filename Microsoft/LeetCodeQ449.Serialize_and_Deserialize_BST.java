@@ -25,6 +25,52 @@ Your serialize and deserialize algorithms should be stateless.
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+//same as LeetCode 297
+public class Codec {
+    
+    private static final String spliter = ",";
+    private static final String NN = "#";
+    
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        serializeHelper(root, sb);
+        return sb.toString();
+    }
+    
+    private void serializeHelper(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            sb.append(NN).append(spliter);
+            return;
+        }
+        sb.append(root.val).append(spliter);
+        serializeHelper(root.left, sb);
+        serializeHelper(root.right, sb);
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Deque<String> nodes = new LinkedList<>();
+        nodes.addAll(Arrays.asList(data.split(spliter)));
+        return deserializeHelper(nodes);
+    }
+    
+    private TreeNode deserializeHelper(Deque<String> nodes) {
+        String value = nodes.pollFirst();
+        if (value.equals(NN)) {
+            return null;
+        }
+        TreeNode root = new TreeNode(Integer.valueOf(value));
+        root.left = deserializeHelper(nodes);
+        root.right = deserializeHelper(nodes);
+        return root;
+    }
+}
+
+
+/****************************************************************************************/
+
 public class Codec {
     //如果input的数字里面是单个digital，就不需要分隔符，这个时候最compact的状态
     private static final String NN = "#";
