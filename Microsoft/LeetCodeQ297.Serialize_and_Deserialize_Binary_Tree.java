@@ -33,6 +33,10 @@ Your serialize and deserialize algorithms should be stateless.
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+
+/************************************************************************************/
+//preorder implementation
 public class Codec {
     private static final String spliter = ",";
     private static final String NN = "#";
