@@ -18,6 +18,35 @@ return false.
  * }
  */
 public class Solution {
+    //create IntervalComparator class implements from Comparator Interface
+    public boolean canAttendMeetings(Interval[] intervals) {
+        if (intervals == null || intervals.length <= 1) {
+            return true;
+        }
+        IntervalComparator myComp = new IntervalComparator();
+        Arrays.sort(intervals, myComp);
+        // Arrays.sort(intervals, new IntervalComparator());
+        
+        Interval current = intervals[0];
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i].start < current.end) {
+                return false;
+            }
+            current = intervals[i];
+        }
+        return true;
+    }
+    
+    private class IntervalComparator implements Comparator<Interval> {
+        @Override
+        public int compare(Interval a, Interval b) {
+            return a.start - b.start;
+        }
+    }
+    
+    
+    /***************************************************************************************/
+    //override匿名类的compare方法
     public boolean canAttendMeetings(Interval[] intervals) {
         if (intervals == null || intervals.length <= 1) {
             return true;
