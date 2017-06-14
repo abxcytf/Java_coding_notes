@@ -64,7 +64,7 @@ public class MedianFinder {
         });
 3. private class MyComparator implements Comparator<Integer> {
         @Override
-        public int compare(Integer a, Integer b) {
+        public int compare(Integer a, Integer b) {  //一定要是public！！！
             return b - a;
             //return b.compareTo(a);
         }
