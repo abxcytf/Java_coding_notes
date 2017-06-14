@@ -27,6 +27,23 @@ LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself according 
  */
 public class Solution {
     
+        //iteration implementation
+        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+        
+        while (root != null) {
+            if (p.val > root.val && q.val > root.val) {
+                root = root.right;
+            } else if (p.val < root.val && q.val < root.val) {
+                root = root.left;
+            } else {
+                return root;
+            }
+        }
+        return null;
+    }
     
     /*********************************************************************************************************/
     //recursion implementation
