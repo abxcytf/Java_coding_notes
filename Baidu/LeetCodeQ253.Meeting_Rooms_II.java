@@ -44,4 +44,29 @@ public class Solution {
         }
         return room;
     }
+    
+    /*************************************************************************/
+    //heap implementation
+    public int minMeetingRooms(Interval[] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return 0;
+        }
+        //sort according to the meeting start time
+        Arrays.sort(intervals, (a, b) -> (a.start - b.start));
+        
+        PriorityQueue<Interval> minHeap = new PriorityQueue<>(intervals.length, (a, b) -> (a.end - b.end)); 
+        //heap sort according to the meeting end time
+        
+        minHeap.offer(intervals[0]);
+        int room = 1;
+        for (int i = 1; i < intervals.length; i++) {
+            //always compare the earlest ending meeting in the current minHeap
+            if (intervals[i].start >= minHeap.peek().end) {
+                minHeap.poll();
+            }
+            minHeap.offer(intervals[i]);
+            room = Math.max(room, minHeap.size());
+        }
+        return room;
+    }
 }
