@@ -12,6 +12,7 @@ Merge k sorted linked lists and return it as one sorted list. Analyze and descri
  * }
  */
 public class Solution {
+    //time complexity: O(n*logK), n is the total number of nodes, k is the size of the input
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
             return null;
