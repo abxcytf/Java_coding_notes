@@ -19,6 +19,8 @@ public class Solution {
             // while (nums[i] - 1 >= 0 && nums[i] - 1 < nums.length && nums[i] != nums[nums[i] - 1]) {
             //     swap(nums, i, nums[i] - 1);
             // }
+            
+            //can not be nums[i] != i + 1 因为有重复e.g.([1, 1, 1])的话会造成无线循环
             if (nums[i] - 1 >= 0 && nums[i] - 1 < nums.length && nums[i] != nums[nums[i] - 1]) {
                 swap(nums, i, nums[i] - 1);
                 i--;
