@@ -70,6 +70,7 @@ public class Solution {
                 maxHeap.offer(-h[1]);
             } else {
                 //remove once see the end point of the building
+                //this API is in PriorityQueue, to delete the elem if present
                 maxHeap.remove(h[1]);
             }
             int cur = maxHeap.peek();
