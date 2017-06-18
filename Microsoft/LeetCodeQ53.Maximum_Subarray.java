@@ -42,4 +42,36 @@ public class Solution {
         }
         return globalMax;
     }
+    
+    /*****************************************************************************************/
+    //for follow up question, need to record the maximum subArray Index(start, end)
+    public int maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int currentMax = nums[0];
+        int globalMax = nums[0];
+        int startIndex = 0;
+        int endIndex = 0;
+        int globalStart = 0;
+        int globalEnd = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (currentMax + nums[i] < nums[i]) {
+                currentMax = nums[i];
+                startIndex = i;
+                endIndex = i;
+            } else {
+                currentMax = currentMax + nums[i];
+                endIndex = i;
+            }
+            if (globalMax < currentMax) {
+                globalMax = currentMax;
+                globalStart = startIndex;
+                globalEnd = endIndex;
+            }
+        }
+        System.out.println(globalStart);
+        System.out.println(globalEnd);
+        return globalMax;
+    }
 }
