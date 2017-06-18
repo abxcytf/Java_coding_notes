@@ -62,7 +62,7 @@ public class Solution {
         });
         
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> (b - a));
-        maxHeap.offer(0);
+        maxHeap.offer(0);  //in order to compose the last line, can not be ignored!!!!
         int prevHeight = 0;
         for (int[] h : heights) {
             if (h[1] < 0) {
