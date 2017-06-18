@@ -73,11 +73,11 @@ public class Solution {
                 //this API is in PriorityQueue, to delete the elem if present
                 maxHeap.remove(h[1]);
             }
-            int cur = maxHeap.peek();
-            if (prevHeight != cur) {
+            int currentHeight = maxHeap.peek();
+            if (prevHeight != currentHeight) {
                 //if the top has been removed, we need to update the result
-                result.add(new int[] {h[0], cur});
-                prevHeight = cur;
+                result.add(new int[] {h[0], currentHeight});
+                prevHeight = currentHeight;
             }
         }
         return result;
