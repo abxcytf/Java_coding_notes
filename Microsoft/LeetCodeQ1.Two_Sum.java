@@ -12,7 +12,7 @@ return [0, 1].
 */
 
 public class Solution {
-    //这个题目因为要返回indices，不能用排序后two pointers的方法因为不是返回个数和值
+    //这个题目因为要返回原值数组中答案的indices，不能用排序后two pointers的方法因为不是返回个数和值
     public int[] twoSum(int[] numbers, int target) {
         if (nums == null || nums.length == 0) {
             return nums;
