@@ -44,20 +44,24 @@ public class Solution {
                 //left child
                 if (current.left != null) {
                     if (prev != null) {
+                        //connect the right node
                         prev.next = current.left;
                     } else {
                         head = current.left;
                     }
+                    //update prev
                     prev = current.left;
                 }
                 
                 //right child
                 if (current.right != null) {
                     if (prev != null) {
+                        //connect the right node
                         prev.next = current.right;
                     } else {
                         head = current.right;
                     }
+                    //update prev
                     prev = current.right;
                 }
                 
