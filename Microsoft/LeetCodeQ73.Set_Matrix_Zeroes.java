@@ -116,4 +116,40 @@ public class Solution {
             }
         }
     }
+    
+    /*********************************************************************************************/
+    //same idea as above but optimized coding
+    public void setZeroes(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return;
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        boolean firstColZero = false;
+        
+        //check the firstColZero flag
+        for (int i = 0; i < rows; i++) {
+            if (matrix[i][0] == 0) {
+                firstColZero = true;
+            }
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[0][j] = matrix[i][0] = 0;
+                }
+            }
+        }
+        
+        
+        //set the matrix according to the mark
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+            if (firstColZero) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
 }
