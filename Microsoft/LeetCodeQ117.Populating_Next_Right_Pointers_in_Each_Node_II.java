@@ -69,6 +69,7 @@ public class Solution {
                 current = current.next;
             }
             //move to next level
+            //update current to next level head
             current = head;
             head = null;
             prev = null;
