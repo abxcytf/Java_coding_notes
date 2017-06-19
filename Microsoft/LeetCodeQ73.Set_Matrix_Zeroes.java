@@ -70,4 +70,50 @@ public class Solution {
             }
         }
     }
+    
+    /*************************************************************************************/
+    //using only the column 0 as reference
+    public void setZeroes(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return;
+        }
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        boolean firstColZero = false;
+        
+        //check the firstColZero flag
+        for (int i = 0; i < rows; i++) {
+            if (matrix[i][0] == 0) {
+                firstColZero = true;
+                break;
+            }
+        }
+        
+        //mark on the column 1 and row 0 for the matrix except the column index 0
+        for (int i = 0; i < rows; i++) {
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    matrix[0][j] = matrix[i][0] = 0;
+                }
+            }
+        }
+        
+        //set the matrix according to the mark
+        //the top row index 0 should be visit last
+        //first row and first column stores information for each row and column
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+        
+        //take care of the column index 0
+        if (firstColZero) {
+            for (int i = 0; i < rows; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+    }
 }
