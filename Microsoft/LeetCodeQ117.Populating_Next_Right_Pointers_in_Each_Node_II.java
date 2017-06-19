@@ -75,4 +75,51 @@ public class Solution {
             prev = null;
         }
     }
+    
+         
+    /*************************************************************************************************/
+    //more generic implementation using dummy head idea for the linkedlist node
+    public void connect(TreeLinkNode root) {
+        if (root == null) {
+            return;
+        }
+        while (root != null) {
+            TreeLinkNode levelDummyHead = new TreeLinkNode(-1);
+            TreeLinkNode current = levelDummyHead;
+            while (root != null) {
+                if (root.left != null) {
+                    current.next = root.left;
+                    current = current.next;
+                }
+                if (root.right != null) {
+                    current.next = root.right;
+                    current = current.next;
+                }
+                root = root.next;
+            }
+            root = levelDummyHead.next;
+        }
+    }
+         
+    /*************************************************************************************************/
+    //recursion for the above solution
+    public void connect(TreeLinkNode root) {
+        if (root == null) {
+            return;
+        }
+        TreeLinkNode levelDummyHead = new TreeLinkNode(-1);
+        TreeLinkNode current = levelDummyHead;
+        while (root != null) {
+            if (root.left != null) {
+                current.next = root.left;
+                current = current.next;
+            }
+            if (root.right != null) {
+                current.next = root.right;
+                current = current.next;
+            }
+            root = root.next;
+        }
+        connect(levelDummyHead.next);
+    }
 }
