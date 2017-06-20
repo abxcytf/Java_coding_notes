@@ -79,7 +79,7 @@ public class Solution {
         }
         int rows = matrix.length;
         int cols = matrix[0].length;
-        boolean firstColZero = false;
+        boolean firstColZero = false; //if first column has zero(s)
         
         //check the firstColZero flag
         for (int i = 0; i < rows; i++) {
@@ -125,7 +125,7 @@ public class Solution {
         }
         int rows = matrix.length;
         int cols = matrix[0].length;
-        boolean firstColZero = false;
+        boolean firstColZero = false; //if first column has zero(s)
         
         //check the firstColZero flag
         for (int i = 0; i < rows; i++) {
