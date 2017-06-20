@@ -48,7 +48,7 @@ public class Solution {
         
         long num = 0; //double also works
         for (; index < chars.length; index++) { //while works as well
-            if (chars[index] < '0' || chars[index] > '9') {
+            if (chars[index] < '0' || chars[index] > '9') { //check if it is valid digit
                 break;
             } //according to the requirement only retrive the value part, not care the later numbers
             num = num * 10 + chars[index] - '0';
