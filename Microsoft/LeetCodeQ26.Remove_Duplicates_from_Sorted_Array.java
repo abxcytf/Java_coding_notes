@@ -26,6 +26,6 @@ public class Solution {
             }
         }
         
-        return index + 1;  //size is current the last index, +1 becomes the length
+        return index + 1;  //index is current the last index, +1 becomes the length
     }
 }
