@@ -62,8 +62,43 @@ public class MyQueue {
     
     
     /**************************************************************************************/
+    //another implementation is to use a temp stack
+    private Deque<Integer> stack;
+    //private Deque<Integer> temp;
+  
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        stack = new ArrayDeque<Integer>();
+        //temp = new ArrayDeque<Integer>();
+    }
     
+    /** Push element x to the back of queue. */
+    //always make the first element into the stack on the top, by using the temp stack
+    public void push(int x) {
+        Deque<Integer> temp = new ArrayDeque<>();
+        while (!stack.isEmpty()) {
+            temp.offerLast(stack.pollLast());
+        }
+        stack.offerLast(x);
+        while (!temp.isEmpty()) {
+            stack.offerLast(temp.pollLast());
+        }
+    }
     
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        return stack.pollLast();
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        return stack.peekLast();
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return stack.isEmpty();
+    }
 }
 
 /**
