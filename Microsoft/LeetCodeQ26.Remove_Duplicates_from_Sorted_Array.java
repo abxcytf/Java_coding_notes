@@ -19,13 +19,13 @@ public class Solution {
             return nums.length;
         }
         
-        int size = 0;
+        int index = 0;
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != nums[size]) {
-                nums[++size] = nums[i];
+            if (nums[i] != nums[index]) {
+                nums[++index] = nums[i];
             }
         }
         
-        return size + 1; //size is current the last index, +1 becomes the length
+        return index + 1;  //size is current the last index, +1 becomes the length
     }
 }
