@@ -14,6 +14,8 @@ Corner Cases:
   such as "/home//foo/".
   In this case, you should ignore redundant slashes and return "/home/foo".
 */
+// ！！！！ "/."表示当前目录
+//！！！！ "/.." 表示上一级目录
 
 public class Solution {
     
