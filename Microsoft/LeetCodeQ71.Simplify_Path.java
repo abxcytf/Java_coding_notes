@@ -18,8 +18,32 @@ Corner Cases:
 //！！！！ "/.." 表示上一级目录 last directory
 
 public class Solution {
-    
-    
+    //time O(n), space O(n)
+    public String simplifyPath(String path) {
+        if (path == null || path.length() == 0) {
+            return "";
+        }
+        String result = "/";
+        String[] stubs = path.split("/");
+        List<String> paths = new LinkedList<>();
+        for (String s : stubs) {
+            if (s.equals("..")) {
+                if (paths.size() > 0) {
+                    paths.remove(paths.size() - 1);
+                }
+            } else if (!s.equals(".") && !s.equals("")) {
+                paths.add(s);
+            }
+        }
+        
+        for (String s : paths) {
+            result += s + "/";
+        }
+        if (result.length() > 1) {
+            result = result.substring(0, result.length() - 1); //remove the last '/'
+        }
+        return result;
+    }
 
     /*****************************************************************************************/
     //optimized implementation, using string[] to simulate stack
