@@ -115,4 +115,40 @@ public class Solution {
             nums[i] ^= nums[j];
         }
     }
+    
+    /*****************************************************************************************/
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return Integer.MAX_VALUE;
+        }
+        quickSortHelper(nums, 0, nums.length - 1, k);
+        return nums[k - 1];
+    }
+    
+    private void quickSortHelper(int[] nums, int left, int right, int k) {
+        if (left >= right) {
+            return;
+        }
+        if (left > k - 1) { //[0, k - 1] are sorted
+            return;
+        }
+        
+        int pivotID = (left + right) >>> 1;
+        int pivot = nums[pivotID];
+        int i = left;
+        int j = right;
+        while (i <= j) {
+            while (i <= j && nums[i] > pivot) {
+                i++;
+            }
+            while (i <= j && nums[j] < pivot) {
+                j--;
+            }
+            if (i <= j) {
+                swap(nums, i++, j--);
+            }
+        }
+        quickSortHelper(nums, left, j, k);
+        quickSortHelper(nums, i, right, k);
+    }
 }
