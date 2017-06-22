@@ -13,6 +13,54 @@ You may assume k is always valid, 1 ≤ k ≤ array's length.
 */
 
 public class Solution {
+    //worst case O(n^2)
+    public int findKthLargest(int[] nums, int k) {
+        // write your code here
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (k <= 0) {
+            return 0;
+        }
+        return helper(nums, 0, nums.length - 1, nums.length - k + 1);
+        
+    }
+    public int helper(int[] nums, int left, int right, int k) {
+        if (left == right) {
+            return nums[left];
+        }
+        int position = partition(nums, left, right);
+        if (position + 1 == k) {
+            return nums[position];
+        } else if (position + 1 < k) {
+            return helper(nums, position + 1, right, k);
+        }  else {
+            return helper(nums, left, position - 1, k);
+        }
+    }
+    public int partition(int[] nums, int l, int r) {
+        // 初始化左右指针和pivot
+        int left = l, right = r;
+        int pivot = nums[left];
+        
+        // 进行partition
+        while (left < right) {
+            while (left < right && nums[right] >= pivot) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= pivot) {
+                left++;
+            }
+            nums[right] = nums[left];
+        }
+        
+        // 返还pivot点到数组里面
+        nums[left] = pivot;
+        return left;         
+    }
+    
+    /**********************************************************************************/
     public int findKthLargest(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
             return Integer.MIN_VALUE;
@@ -58,7 +106,6 @@ public class Solution {
         swap(nums, left, r);
         return r;
     }
-
     
     private void swap(int[] nums, int i, int j) {
         if (nums[i] != nums[j]) {
