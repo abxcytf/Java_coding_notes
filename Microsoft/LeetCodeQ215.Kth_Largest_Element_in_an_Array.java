@@ -46,7 +46,7 @@ public class Solution {
         
         // 进行partition
         while (left < right) {
-            while (left < right && nums[right] <= pivot) {
+            while (left < right && nums[right] <= pivot) { //check right pointer first
                 right--;
             }
             nums[left] = nums[right];
