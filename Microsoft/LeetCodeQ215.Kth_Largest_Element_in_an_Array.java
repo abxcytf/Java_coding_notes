@@ -94,7 +94,7 @@ public class Solution {
         int r = right;
         swap(nums, pivotId, left);
         while (l <= r) {
-            if (nums[l] < pivot && nums[r] > pivot) {
+            if (nums[l] < pivot && nums[r] > pivot) {  //swap first!!!!
                 swap(nums, l++, r--);
             }
             if (nums[l] >= pivot) {
