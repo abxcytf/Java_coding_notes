@@ -87,24 +87,28 @@ public class Solution {
         }
         int len = s.length();
         maxLen = 0;
+        pos = 0;
         for (int i = 0; i < len - 1; i++) {
-            extendPalindrome(s, i, i); //从中间向两边延伸
+            //从中间向两边延伸
+            extendPalindrome(s, i, i); //for odd cases
             //assume odd length, try to extend Palindrome as possible
-            extendPalindrome(s, i, i + 1);
-            //assume even length.
+            if (s.charAt(i) == s.charAt(i + 1)) { //for even cases
+                extendPalindrome(s, i, i + 1); 
+                //assume even length
+            }
         }
         return s.substring(pos, pos + maxLen);
     }
     
     private void extendPalindrome(String s, int i, int j) {
-        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) { //if it is palindrome, extend from both side
             i--;
             j++;
         }
-        int currentLen = (j - 1) - (i + 1) + 1; 
+        int currentLen = (j - 1) - (i + 1) + 1;
         if (currentLen > maxLen) {
             maxLen = currentLen;
-            pos = i + 1;
+            pos = i + 1; //start index
         }
     }
 }
