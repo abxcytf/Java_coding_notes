@@ -15,7 +15,7 @@ Note: You may assume the string contain only lowercase letters.
 */
 
 public class Solution {
-    //time O(n), space O(1)
+    //time O(n), space O(n)
     public int firstUniqChar(String s) {
         if (s == null || s.length() == 0) {
             return -1;
