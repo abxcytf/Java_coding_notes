@@ -76,4 +76,35 @@ public class Solution {
         }
         return result;
     }
+    
+    /**************************************************************************************/
+    //more optimized solution
+    private int pos;
+    private int maxLen;
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() <= 1) {
+            return s;
+        }
+        int len = s.length();
+        maxLen = 0;
+        for (int i = 0; i < len - 1; i++) {
+            extendPalindrome(s, i, i); //从中间向两边延伸
+            //assume odd length, try to extend Palindrome as possible
+            extendPalindrome(s, i, i + 1);
+            //assume even length.
+        }
+        return s.substring(pos, pos + maxLen);
+    }
+    
+    private void extendPalindrome(String s, int i, int j) {
+        while (i >= 0 && j < s.length() && s.charAt(i) == s.charAt(j)) {
+            i--;
+            j++;
+        }
+        int currentLen = (j - 1) - (i + 1) + 1; 
+        if (currentLen > maxLen) {
+            maxLen = currentLen;
+            pos = i + 1;
+        }
+    }
 }
