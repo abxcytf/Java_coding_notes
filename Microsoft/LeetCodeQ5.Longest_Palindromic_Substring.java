@@ -54,6 +54,26 @@ public class Solution {
     }
     
     /***********************************************************************************************/
-    
-    
+    //优化过后更加精简的写法
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() <= 1) {
+            return s;
+        }
+        int len = s.length();
+        String result = "";
+        
+        boolean[][] isPalindrome = new boolean[len][len];
+        
+        for (int i = len - 1; i >= 0; i--) {
+            for (int j = i; j < len; j++) {
+                isPalindrome[i][j] = s.charAt(i) == s.charAt(j) 
+                                    && (j - i < 3 || isPalindrome[i + 1][j - 1]);
+                
+                if (isPalindrome[i][j] && j - i + 1 > result.length()) {
+                    result = s.substring(i, j + 1);
+                }
+            }
+        }
+        return result;
+    }
 }
