@@ -36,7 +36,7 @@ public class BSTIterator {
     /** @return the next smallest number */
     public int next() {
         TreeNode temp = stack.pollLast();
-        pushAllLeft(temp.right);
+        pushAllLeft(temp.right); //update the current stack
         return temp.val;
     }
     
