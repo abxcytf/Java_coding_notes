@@ -15,7 +15,7 @@ A = [3,2,1,0,4], return false.
 */
 
 public class Solution {
-    //backtracking, TLE
+    //backtracking, TLE, time: O(2^n), space O(n)
     public boolean canJump(int[] nums) {
         return canJumpFromPosition(nums, 0);
     }
