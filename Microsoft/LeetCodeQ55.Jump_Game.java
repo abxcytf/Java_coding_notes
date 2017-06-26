@@ -37,6 +37,31 @@ public class Solution {
     }
     
     /**********************************************************************************/
+    //DP implementation
+    public boolean canJump(int[] nums) {
+        int[] dp = new int[nums.length];
+        for (int i = 0; i < dp.length; i++) {
+            dp[i] = -1;
+        }
+        dp[nums.length - 1] = 1;
+        return canJumpFromPosition(nums, 0, dp);
+    }
     
+    private boolean canJumpFromPosition(int[] nums, int pos, int[] dp) {
+        if (dp[pos] != -1) {
+            return dp[pos] == 1;
+        }
+        
+        int furthestJump = Math.min(pos + nums[pos], nums.length - 1);
+        for (int nextPos = pos + 1; nextPos <= furthestJump; nextPos++) {
+            if (canJumpFromPosition(nums, nextPos, dp)) {
+                dp[pos] = 1;
+                return true;
+            }
+        }
+        dp[pos] = 0;
+        return false;
+    }
     
+    /********************************************************************************
 }
