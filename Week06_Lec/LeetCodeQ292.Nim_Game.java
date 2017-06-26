@@ -36,4 +36,29 @@ public class Solution {
         map.put(n, !canNextWin);
         return !canNextWin;
     }
+    
+    /***********************************************************************/
+    //DP implementation, also TLE
+    public boolean canWinNim(int n) {
+        return helperDP(n);
+    }
+    
+    private boolean helperDP(int n) {
+        if (n <= 3) {
+            return true;
+        }
+        
+        boolean[] dp = new boolean[4]; 
+        //rolling array, only depends on the previous 3 status
+        
+        //dp[0] = false;
+        dp[1] = true;
+        dp[2] = true;
+        dp[3] = true;
+        
+        for (int i = 4; i <= n; i++) {
+            dp[i % 4] = !(dp[(i - 1) % 4] && dp[(i - 2) % 4] && dp[(i - 3) % 4]);
+        }
+        return dp[n % 4];
+    }
 }
