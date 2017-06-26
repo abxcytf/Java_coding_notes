@@ -26,7 +26,9 @@ public class Solution {
         }
         int furthestJump = Math.min(pos + nums[pos], nums.length - 1);
         
-        for (int nextPos = pos + 1; nextPos <= furthestJump; nextPos++) {
+        //for (int nextPos = pos + 1; nextPos <= furthestJump; nextPos++) {
+        for (int nextPos = furthestJump; nextPos >= pos + 1; nextPos--) { 
+            //start from the furthest is faster the previous implementation
             if (canJumpFromPosition(nums, nextPos)) {
                 return true;
             }
