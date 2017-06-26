@@ -64,4 +64,29 @@ public class Solution {
     }
     
     /********************************************************************************/
+    //optimized greedy solution, time O(n)
+    public boolean canJump(int[] nums) {
+        int lastPos = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (i + nums[i] >= lastPos) {
+                lastPos = i;
+            }
+        }
+        return lastPos == 0;
+    }
+    
+    /*********************************************************************************/
+    public boolean canJump(int[] nums) {
+        boolean[] can = new boolean[nums.length];
+        can[0] = true;
+        for (int i = 1; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (can[j] && j + nums[j] >= i) {
+                    can[i] = true;
+                    break;
+                }
+            }
+        }
+        return can[nums.length - 1];
+    }
 }
