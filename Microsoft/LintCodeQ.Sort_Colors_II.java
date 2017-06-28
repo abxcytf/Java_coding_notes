@@ -20,39 +20,83 @@ class Solution {
      * @param k: An integer
      * @return: nothing
      */
+    //TLE in lintcode
     public void sortColors2(int[] colors, int k) {
-        // write your code here
-        if (colors == null || colors.length <= 1 || k <= 1) return;
-        int count = 0;
+        if (colors == null || colors.length <= 1 || k <= 1) {
+            return;
+        }
         
-        int left = 0, right = colors.length - 1;
-        while (count < k && left <= right) {
+        int left = 0;
+        int right = colors.length - 1;
+        int count = 0;
+        while (count < k && left <= right) { //left < right works too
             int min = Integer.MAX_VALUE;
             int max = Integer.MIN_VALUE;
             for (int i = left; i <= right; i++) {
                 min = Math.min(min, colors[i]);
                 max = Math.max(max, colors[i]);
             }
-            int cur = left;
-            while (cur <= right) {
-                if (colors[cur] == max) {
-                    swap(colors, cur, right);
+            int current = left;
+            while (current <= right) {
+                if (colors[current] == max) {
+                    swap(colors, current, right);
                     right--;
-                } else if (colors[cur] == min) {
-                    swap(colors, cur, left);
-                    cur++;
+                } else if (colors[current] == min) {
+                    swap(colors, current, left);
+                    current++;
                     left++;
                 } else {
-                    cur++;
+                    current++;
                 }
             }
             count += 2;
         }
     }
-
+    
+    
     private void swap(int[] colors, int i, int j) {
-        int temp = colors[i];
-        colors[i] = colors[j];
-        colors[j] = temp;
+        if (colors[i] != colors[j]) {
+            colors[i] ^= colors[j];
+            colors[j] ^= colors[i];
+            colors[i] ^= colors[j];
+        }
+    }
+    
+    /***************************************************************************************/
+    //recursion implementation, TLE
+    public void sortColors2(int[] colors, int k) {
+        if (colors == null || colors.length <= 1 || k <= 1) {
+            return;
+        }
+        helper(colors, 0, colors.length - 1, k);
+    }
+    
+    private void helper(int[] colors, int left, int right, int k) {
+        if (left >= right) {
+            return;
+        }
+        if (k <= 0) {
+            return;
+        }
+        int current = left;
+        while (current <= right) {
+            if (colors[current] == k) {
+                swap(colors, current, right);
+                right--;
+            } else {
+                current++;
+            }
+        }
+        
+        helper(colors, left, right, k - 1);
+    }
+    
+    
+    private void swap(int[] colors, int i, int j) {
+        if (colors[i] != colors[j]) {
+            colors[i] ^= colors[j];
+            colors[j] ^= colors[i];
+            colors[i] ^= colors[j];
+        }
     }
 }
