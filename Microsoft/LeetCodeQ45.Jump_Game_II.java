@@ -45,4 +45,29 @@ public class Solution {
         //answer
         return steps[nums.length - 1];
     }
+    
+    /****************************************************************************/
+    //Greedy
+    public int jump(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int start = 0;
+        int end = 0;
+        int jumps = 0;
+        while (end < nums.length - 1) { 
+            //when end >= nums.length - 1
+            //means already reach the target
+            jumps++;
+            int farthest = end;
+            for (int i = start; i <= end; i++) {
+                if (i + nums[i] > farthest) {
+                    farthest = i + nums[i];
+                }
+            }
+            start = end + 1;
+            end = farthest;
+        }
+        return jumps;
+    }
 }
