@@ -14,3 +14,45 @@ A rather straight forward solution is a two-pass algorithm using counting sort.
 That will cost O(k) extra memory. Can you do it without using extra memory?
 */
 
+class Solution {
+    /**
+     * @param colors: A list of integer
+     * @param k: An integer
+     * @return: nothing
+     */
+    public void sortColors2(int[] colors, int k) {
+        // write your code here
+        if (colors == null || colors.length <= 1 || k <= 1) return;
+        int count = 0;
+        
+        int left = 0, right = colors.length - 1;
+        while (count < k && left <= right) {
+            int min = Integer.MAX_VALUE;
+            int max = Integer.MIN_VALUE;
+            for (int i = left; i <= right; i++) {
+                min = Math.min(min, colors[i]);
+                max = Math.max(max, colors[i]);
+            }
+            int cur = left;
+            while (cur <= right) {
+                if (colors[cur] == max) {
+                    swap(colors, cur, right);
+                    right--;
+                } else if (colors[cur] == min) {
+                    swap(colors, cur, left);
+                    cur++;
+                    left++;
+                } else {
+                    cur++;
+                }
+            }
+            count += 2;
+        }
+    }
+
+    private void swap(int[] colors, int i, int j) {
+        int temp = colors[i];
+        colors[i] = colors[j];
+        colors[j] = temp;
+    }
+}
