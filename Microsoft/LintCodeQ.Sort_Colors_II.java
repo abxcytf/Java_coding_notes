@@ -143,6 +143,46 @@ class Solution {
     }
     
     /************************************************************************************/
+    // time complexity: O(nlogk), the best algorithm based on comparing
+    public void sortColors2(int[] colors, int k) {
+        if (colors == null || colors.length <= 1 || k <= 1) {
+            return;
+        }
+        helper(colors, 0, colors.length - 1, 1, k);
+    }
     
+    private void helper(int[] colors, int left, int right, int colorFrom, int colorTo) {
+        if (colorFrom >= colorTo) {
+            return;
+        }
+        if (left >= right) {
+            return;
+        }
+        
+        int colorMid = (colorFrom + colorTo) >>> 1;
+        int l = left;
+        int r = right;
+        while (l <= r) {
+            while (l <= r && colors[l] <= colorMid) {
+                l++;
+            }
+            while (l <= r && colors[r] > colorMid) {
+                r--;
+            }
+            if (l <= r) {
+                swap(colors, l++, r--);
+            }
+        }
+        
+        helper(colors, left, r, colorFrom, colorMid);
+        helper(colors, l, right, colorMid + 1, colorTo);
+    }
     
+    private void swap(int[] colors, int i, int j) {
+        if (colors[i] != colors[j]) {
+            colors[i] ^= colors[j];
+            colors[j] ^= colors[i];
+            colors[i] ^= colors[j];
+        }
+    }
 }
