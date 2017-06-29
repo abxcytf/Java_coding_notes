@@ -99,4 +99,50 @@ class Solution {
             colors[i] ^= colors[j];
         }
     }
+    
+    /**********************************************************************************/
+    //similar as above TLE
+    public void sortColors2(int[] colors, int k) {
+        if (colors == null || colors.length <= 1 || k <= 1) {
+            return;
+        }
+        helper(colors, 0, colors.length - 1, k, 1);
+    }
+    
+    private void helper(int[] colors, int left, int right, int k, int h) {
+        if (left >= right) {
+            return;
+        }
+        if (h >= k) {
+            return;
+        }
+        int current = left;
+        while (current <= right) {
+            if (colors[current] == k) {
+                swap(colors, current, right);
+                right--;
+            } else if (colors[current] == h) {
+                swap(colors, current, left);
+                current++;
+                left++;
+            } else {
+                current++;
+            }
+        }
+        
+        helper(colors, left, right, k - 1, h + 1);
+    }
+    
+    
+    private void swap(int[] colors, int i, int j) {
+        if (colors[i] != colors[j]) {
+            colors[i] ^= colors[j];
+            colors[j] ^= colors[i];
+            colors[i] ^= colors[j];
+        }
+    }
+    
+    /************************************************************************************/
+    
+    
 }
