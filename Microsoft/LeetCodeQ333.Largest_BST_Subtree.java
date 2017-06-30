@@ -30,7 +30,8 @@ Follow up:
  */
 public class Solution {
     //brutal force, top-down recursion, time complexity O(n^2)
-    public class ResultType {
+    // (size, rangeLower, rangeUpper) -- size of current tree, range of current tree [rangeLower, rangeUpper]
+    public class ResultType { 
         public int size;
         public long lower;
         public long upper;
