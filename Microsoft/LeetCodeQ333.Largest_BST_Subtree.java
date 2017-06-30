@@ -29,7 +29,7 @@ Follow up:
  * }
  */
 public class Solution {
-    //brutal force, top-down recursion, time complexity O(n^2)
+    //down-top recursion, time complexity O(n)
     // (size, rangeLower, rangeUpper) -- size of current tree, range of current tree [rangeLower, rangeUpper]
     public class ResultType { 
         public int size;
@@ -67,5 +67,49 @@ public class Solution {
         int size = left.size + 1 + right.size;
         max = Math.max(max, size);
         return new ResultType(size, Math.min(left.lower, root.val), Math.max(right.upper, root.val));
+    }
+    
+    
+    /**********************************************************************************************************/
+    //similar idea as above more optimized solution
+    public class ResultType {
+        public int size;
+        public long lower;
+        public long upper;
+        
+        public ResultType(int size, long lower, long upper) {
+            this.size = size;
+            this.lower = lower;
+            this.upper = upper;
+        }
+    }
+    
+    private int max = 0;
+    
+    public int largestBSTSubtree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        preorderTraverse(root, null);
+        return max;
+    }
+    
+    private ResultType preorderTraverse(TreeNode root, TreeNode parent) {
+        if (root == null) {
+            return new ResultType(0, parent.val, parent.val);
+        }
+        
+        ResultType left = preorderTraverse(root.left, root);
+        ResultType right = preorderTraverse(root.right, root);
+        
+        if (left.size == -1 || right.size == -1 || left.upper > root.val || right.lower < root.val
+           	|| (root.left != null && root.left.val == root.val)
+           	|| (root.right != null && root.right.val == root.val)) {
+            return new ResultType(-1, 0, 0);
+        }
+        
+        int size = left.size + 1 + right.size;
+        max = Math.max(max, size);
+        return new ResultType(size, left.lower, right.upper);
     }
 }
