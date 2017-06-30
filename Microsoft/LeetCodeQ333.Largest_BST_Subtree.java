@@ -60,7 +60,7 @@ public class Solution {
         ResultType right = preorderTraverse(root.right);
         
         if (left.size == -1 || right.size == -1 || left.upper >= root.val || right.lower <= root.val) {
-            return new ResultType(-1, 0, 0);
+            return new ResultType(-1, 0, 0); //to indicate if current root with its subtree is BST
         }
         
         int size = left.size + 1 + right.size;
