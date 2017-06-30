@@ -54,7 +54,7 @@ public class Solution {
     
     private ResultType preorderTraverse(TreeNode root) {
         if (root == null) {
-            return new ResultType(0, Integer.MAX_VALUE, Integer.MIN_VALUE); 
+            return new ResultType(0, Long.MAX_VALUE, Long.MIN_VALUE); 
         }
         ResultType left = preorderTraverse(root.left);
         ResultType right = preorderTraverse(root.right);
