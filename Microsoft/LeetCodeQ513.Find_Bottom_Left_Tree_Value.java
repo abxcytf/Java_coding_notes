@@ -38,6 +38,7 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
  * }
  */
 public class Solution {
+    //BFS, time complexity O(n), n is the number of the nodes
     public int findBottomLeftValue(TreeNode root) {
         if (root == null) {
             return -1;
