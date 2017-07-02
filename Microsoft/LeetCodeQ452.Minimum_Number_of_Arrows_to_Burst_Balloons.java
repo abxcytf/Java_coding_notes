@@ -27,7 +27,7 @@ and another arrow at x = 11 (bursting the other two balloons).
 */
 
 public class Solution {
-    //time complexity: O(n)
+    //time complexity: O(nlogn) because of sort
     public int findMinArrowShots(int[][] points) {
         if (points == null || points.length == 0 || points[0].length == 0) {
             return 0;
@@ -49,8 +49,8 @@ public class Solution {
         return result;
     }
     
-    /***************************************************************************/
-    //optimized solution, sort according to the end position, time complexity: O(n)
+    /*******************************************************************************************/
+    //optimized solution, sort according to the end position, time complexity: O(nlogn) sorting
     public int findMinArrowShots(int[][] points) {
         if (points == null || points.length == 0 || points[0].length == 0) {
             return 0;
