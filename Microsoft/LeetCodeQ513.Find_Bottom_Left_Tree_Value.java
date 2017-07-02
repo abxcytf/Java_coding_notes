@@ -63,4 +63,25 @@ public class Solution {
         }
         return result;
     }
+    
+    /****************************************************************************/
+    //optimized solution, BFS, scan from right to left
+    public int findBottomLeftValue(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offerLast(root);
+        TreeNode current = null;
+        while (!queue.isEmpty()) {
+            current = queue.pollFirst();
+            if (current.right != null) {
+                queue.offerLast(current.right);
+            }
+            if (current.left != null) {
+                queue.offerLast(current.left);
+            }
+        }
+        return current.val;
+    }
 }
