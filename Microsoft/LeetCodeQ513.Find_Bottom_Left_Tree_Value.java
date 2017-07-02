@@ -57,6 +57,7 @@ public class Solution {
         
         if (depth > maxDepth) {
             //update the result;
+            //when the maxDepth, it is always the most bottom left value reached first
             maxDepth = depth;
             bottomLeftValue = root.val;
         }
