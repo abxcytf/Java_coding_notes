@@ -38,7 +38,31 @@ Note: You may assume the tree (i.e., the given root node) is not NULL.
  * }
  */
 public class Solution {
+    //DFS, preorder traverse and update the depth and the most bottom left value while traversal
+    //O(logn)
+    private int bottomLeftValue = -1;
+    private int maxDepth = 0;
+    public int findBottomLeftValue(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        dfsHelper(root, 1);
+        return bottomLeftValue;
+    }
     
+    private void dfsHelper(TreeNode root, int depth) {
+        if (root == null) {
+            return;
+        }
+        
+        if (depth > maxDepth) {
+            //update the result;
+            maxDepth = depth;
+            bottomLeftValue = root.val;
+        }
+        dfsHelper(root.left, depth + 1);
+        dfsHelper(root.right, depth + 1);
+    }
     
     /*****************************************************************************/
     //BFS, time complexity O(n), n is the number of the nodes
