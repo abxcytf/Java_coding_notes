@@ -151,4 +151,31 @@ public class Solution {
         }
         return stack.isEmpty();
     }
+    
+    /******************************************************************************************************/
+    //Regular expression
+    /*
+    Only change is in Java we need to use double \ to quote a special character.
+
+    Two brilliant points:
+    1. Use Non Greedy mode (.*?) when matching CDATA. 
+        Reference: https://stackoverflow.com/questions/3075130/what-is-the-difference-between-and-regular-expressions
+    2. Use Group (([A-Z]{1,9}) then \\1) when matching TAG_NAME. Reference: 
+        http://www.regular-expressions.info/refcapture.html
+    */
+    public boolean isValid(String code) {
+        if (code.equals("t")) {
+            return false;
+        }
+        //<![CDATA[CDATA_CONTENT]]> in reg expression
+        code = code.replaceAll("<!\\[CDATA\\[.*?\\]\\]>", "c");
+        
+        String prev = "";
+        while (!code.equals(prev)) {
+            prev = code;
+            code = code.replaceAll("<([A-Z]{1,9})>[^<]*</\\1>", "t");
+        }
+        
+        return code.equals("t");
+    }
 }
