@@ -94,8 +94,9 @@ public class Solution {
             return false;
         }
         Deque<String> stack = new ArrayDeque<>();
-        int i = 0;
-        while (i < code.length()) {
+        int i = 0; //global index pointer
+        //create the rule to scan the input string
+        while (i < code.length()) { 
         //for (int i = 0; i < code.length();) {
             if (i > 0 && stack.isEmpty()) {
                 return false;
