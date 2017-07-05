@@ -40,6 +40,7 @@ public class Solution {
         int[] result = new int[nums.length - k + 1]; 
         int index = 0;
         
+        //compose window from 0 to k - 2
         for (int i = 0; i < k - 1; i++) {
             inQueue(queue, nums[i]);
         }
