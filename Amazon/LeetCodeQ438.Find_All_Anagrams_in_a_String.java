@@ -72,4 +72,31 @@ public class Solution {
         }
         return result;
     }
+    
+    /********************************************************************************************************/
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> result = new ArrayList<>();
+        if (s == null || p == null || s.length() == 0 || p.length() == 0) {
+            return result;
+        }
+        int[] map = new int[256];
+        for (char ch : p.toCharArray()) {
+            map[ch]++;
+        }
+        int left = 0;
+        int right = 0;
+        int count = 0;
+        while (right < s.length()) {
+            if (map[s.charAt(right++)]-- > 0) {
+                count++;
+            }
+            if (count == p.length()) {
+                result.add(left);
+            }
+            if (right - left == p.length() && map[s.charAt(left++)]++ >= 0) {
+                count--;
+            }
+        }
+        return result;
+    }
 }
