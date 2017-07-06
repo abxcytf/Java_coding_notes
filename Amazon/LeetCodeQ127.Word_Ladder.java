@@ -25,6 +25,7 @@ Note:
 */
 
 public class Solution {
+    //BFS
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> dict = new HashSet<>();
         for (String word : wordList) {
