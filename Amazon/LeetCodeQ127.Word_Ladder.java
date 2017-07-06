@@ -25,6 +25,44 @@ Note:
 */
 
 public class Solution {
+    //using set to iterate
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> reached = new HashSet<>();
+        Set<String> dict = new HashSet<>();
+        reached.add(beginWord);
+        for (String word : wordList) {
+            dict.add(word);
+        }
+        if (beginWord.equals(endWord)) {
+            return 1;
+        }
+        
+        int length = 1;
+        while (!reached.contains(endWord)) {
+            Set<String> toAdd = new HashSet<>();
+            for (String each : reached) {
+                for (int i = 0; i < each.length(); i++) {
+                    char[] chars = each.toCharArray();
+                    for (char ch = 'a'; ch <= 'z'; ch++) {
+                        chars[i] = ch;
+                        String word = new String(chars);
+                        if (dict.contains(word)) {
+                            dict.remove(word);
+                            toAdd.add(word);
+                        }
+                    }
+                }
+            }
+            length++;
+            if (toAdd.size() == 0) {
+                return 0;
+            }
+            reached = toAdd;
+        }
+        return length;
+    }
+    
+    /********************************************************************************************/
     //BFS
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> dict = new HashSet<>();
