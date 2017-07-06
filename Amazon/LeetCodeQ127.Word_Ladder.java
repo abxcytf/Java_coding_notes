@@ -99,6 +99,9 @@ public class Solution {
         return 0;
     }
     
+    // get connections with given word.
+    // for example, given word = 'hot', dict = {'hot', 'hit', 'hog'}
+    // it will return ['hit', 'hog']
     private List<String> getNextWords(String word, Set<String> dict) {
         List<String> nextWords = new ArrayList<>();
         for (char ch = 'a'; ch <= 'z'; ch++) {
@@ -114,7 +117,8 @@ public class Solution {
         }
         return nextWords;
     }
-    
+    // replace character of a string at given index to a given character
+    // return a new string
     private String replace(String s, int index, char ch) {
         char[] chars = s.toCharArray();
         chars[index] = ch;
