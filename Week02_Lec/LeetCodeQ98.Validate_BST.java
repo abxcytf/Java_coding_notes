@@ -39,7 +39,7 @@ public class Solution {
         return helper(root.left, min, root.val) && helper(root.right, root.val, max);
     }
     
-    
+    /******************************************************************************************/
     //using ResultType approach
     class ResultType {
         boolean is_bst;
