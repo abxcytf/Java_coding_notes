@@ -36,7 +36,7 @@ public class Solution {
  
  */
 
-    static int count_ascending_tuples(int[] A) {
+    private static int count_ascending_tuples(int[] A) {
         if (A == null || A.length <= 2) {
             return 0;
         } 
