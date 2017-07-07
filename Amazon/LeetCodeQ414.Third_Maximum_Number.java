@@ -62,7 +62,7 @@ public class Solution {
     }
     
     /************************************************************************************/
-    //same idea as above using long
+    //same idea as above using long, 运行时间比之前用Integer refer的快!!!!
     public int thirdMax(int[] nums) {
         if (nums == null || nums.length == 0) {
             return -1;
