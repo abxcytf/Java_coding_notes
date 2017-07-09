@@ -39,7 +39,7 @@ public class Solution {
     }
     
     /***************************************************************************************/
-    Sort both arrays, use two pointers, time complexity O(n), space complexity O(n)
+    Sort both arrays, use two pointers, time complexity O(nlogn) sort, space complexity O(n)
     public int[] intersection(int[] nums1, int[] nums2) {
         if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0) {
             return new int[0];
@@ -70,6 +70,44 @@ public class Solution {
     }
     
     /*********************************************************************************************/
+    //binary search implementation, time O(nlogn) - sort, binary search
+    public int[] intersection(int[] nums1, int[] nums2) {
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0) {
+            return new int[0];
+        }
+        Set<Integer> set = new HashSet<>();
+        Arrays.sort(nums2);
+        for (Integer num : nums1) {
+            if (binarySearch(nums2, num)) {
+                set.add(num);
+            }
+        }
+        int[] result = new int[set.size()];
+        int index = 0;
+        for (Integer num : set) {
+            result[index++] = num;
+        }
+        return result;
+    }
     
-    
+    private boolean binarySearch(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left + 1 < right) {
+            int mid = (left + right) >>> 1;
+            if (nums[mid] == target) {
+                return true;
+            } else if (nums[mid] > target) {
+                right = mid;
+            } else {
+                left = mid;    
+            }
+        }
+        
+        if (nums[left] == target || nums[right] == target) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
