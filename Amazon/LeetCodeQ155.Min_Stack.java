@@ -20,7 +20,43 @@ minStack.getMin();   --> Returns -2.
 */
 
 public class MinStack {
-    //implementation using two stacks
+    //two stacks, stack1 and stack2 push and pop at the same time
+    private Deque<Integer> stack1;
+    private Deque<Integer> stack2;
+    
+    /** initialize your data structure here. */
+    public MinStack() {
+        stack1 = new ArrayDeque<Integer>();
+        stack2 = new ArrayDeque<Integer>();
+    }
+    
+    public void push(int x) {
+        stack1.offerLast(x);
+        if (stack2.isEmpty()) {
+            stack2.offerLast(x);
+        } else {
+            stack2.offerLast(Math.min(x, stack2.peekLast()));
+        }
+    }
+    
+    public void pop() {
+        if (stack1.isEmpty()) {
+            return;
+        }
+        stack1.pollLast();
+        stack2.pollLast();
+    }
+    
+    public int top() {
+        return stack1.peekLast();
+    }
+    
+    public int getMin() {
+        return stack2.peekLast();
+    }
+    
+    /********************************************************************************/
+    //implementation using two stacks, more optimized solution
     private Deque<Integer> stack1;
     private Deque<Integer> stack2;
     
