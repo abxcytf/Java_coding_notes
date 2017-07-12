@@ -55,12 +55,16 @@ public class Solution {
             sum += A[i];
             candidate += i * A[i];
         }
-        
+        //candidate is the currently F(0)
         int best = candidate;
         for (int i = n - 1; i >= 0; i--) {
-            candidate = candidate + sum - n * A[i];
+            candidate = candidate + sum - n * A[i]; 
             best = Math.max(best, candidate);
         }
+        //k = 1, F(1), A[n - 1]   
+        //k = 2, F(2), A[n - 2]
+        //...
+        //k = n, F(n), A[0]  == F(0), A[n - 1]
         return best;
     }
 }
