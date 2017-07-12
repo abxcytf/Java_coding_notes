@@ -62,7 +62,7 @@ public class Solution {
         }
         Arrays.sort(nums); //O(nlogn)
         int left = 0;
-        int right = 1;
+        int right = 0;
         int count = 0;
         while (right < nums.length) {
             if (right <= left || nums[left] + k > nums[right]) {
