@@ -21,6 +21,7 @@ One possible longest palindromic subsequence is "bb".
 */
 
 public class Solution {
+    //memorized search 
     public int longestPalindromeSubseq(String s) {
         return helper(s, 0, s.length() - 1, new Integer[s.length()][s.length()]);
     }
