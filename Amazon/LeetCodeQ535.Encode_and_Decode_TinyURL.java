@@ -30,8 +30,55 @@ public class Codec {
     
     
     /********************************************************************************************/
+    //Approach 2 - using hashcode
+    Map<Integer, String> map = new HashMap<>();
     
+    // Encodes a URL to a shortened URL.
+    public String encode(String longUrl) {
+        map.put(longUrl.hashCode(), longUrl);
+        return "http://tinyurl.com/" + longUrl.hashCode();
+    }
+
+    // Decodes a shortened URL to its original URL.
+    public String decode(String shortUrl) {
+        return map.get(Integer.parseInt(shortUrl.replace("http://tinyurl.com/", "")));
+    }
     
+    /********************************************************************************************/
+    //Approach 3 - using random function
+    Map<Integer, String> map = new HashMap<>();
+    Random rand = new Random();
+    int key = rand.nextInt(10000);
+    
+    // Encodes a URL to a shortened URL.
+    public String encode(String longUrl) {
+        while (map.containsKey(key)) {
+            key = rand.nextInt(10000);
+        }
+        map.put(key, longUrl);
+        return "http://tinyurl.com/" + key;
+    }
+
+    // Decodes a shortened URL to its original URL.
+    public String decode(String shortUrl) {
+        return map.get(Integer.parseInt(shortUrl.replace("http://tinyurl.com/", "")));
+    }
+    
+    /*******************************************************************************************/
+    //similar idea using list
+    List<String> urls = new ArrayList<>();
+    
+    // Encodes a URL to a shortened URL.
+    public String encode(String longUrl) {
+        urls.add(longUrl);
+        return "http://tinyurl.com/" + (urls.size() - 1);
+    }
+
+    // Decodes a shortened URL to its original URL.
+    public String decode(String shortUrl) {
+        int index = Integer.parseInt(shortUrl.replace("http://tinyurl.com/", ""));
+        return index < urls.size() ? urls.get(index) : "";
+    }
 }
 
 // Your Codec object will be instantiated and called as such:
