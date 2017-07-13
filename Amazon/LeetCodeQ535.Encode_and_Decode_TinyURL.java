@@ -13,7 +13,7 @@ tiny URL can be decoded to the original URL.
 */
 
 public class Codec {
-    //using hashMap index to compose the shortUrl
+    //Approach 1- Using simple counter - using hashMap index to compose the shortUrl
     Map<Integer, String> map = new HashMap<>();
     int index = 0;
     
