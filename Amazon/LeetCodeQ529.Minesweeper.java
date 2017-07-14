@@ -122,4 +122,54 @@ public class Solution {
         }
         return board;
     }
+ 
+    /**************************************************************************************************/
+    //optimized DFS solution
+    private int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1}; //8 directions
+    private int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+    public char[][] updateBoard(char[][] board, int[] click) {
+        //asume inputs are all valid
+        int m = board.length;
+        int n = board[0].length;
+        int row = click[0];
+        int col = click[1];
+    
+        if (board[row][col] == 'M') {
+            board[row][col] = 'X';
+            return board;
+        } 
+        //if it is not a mine, find out if the mine around
+        int count = 0;
+        for (int i = 0; i < 8; i++) {
+            int r = row + dx[i];
+            int c = col + dy[i];
+            if (r < 0 || r >= m || c < 0 || c >= n) {
+                continue;
+            }
+            if (board[r][c] == 'M') { 
+            //if (board[r][c] == 'M' || board[r][c] == 'X') { 
+                count++;
+            }
+        }
+        if (count > 0) {
+            //board[row][col] is next to a mine, so it should be a number
+            board[row][col] = (char)(count + '0');
+        } else {
+            //board[row][col] is a 'E'
+            //unreveal it to 'B'
+            board[row][col] = 'B';
+            //continue DFS to adjacent cells
+            for (int i = 0; i < 8; i++) {
+                int r = row + dx[i];
+                int c = col + dy[i];
+                if (r < 0 || r >= m || c < 0 || c >= n) {
+                    continue;
+                }
+                if (board[r][c] == 'E') {
+                    updateBoard(board, new int[]{r, c});
+                }
+            }
+        }
+        return board;
+    }
 }
