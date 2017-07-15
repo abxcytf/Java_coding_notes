@@ -114,6 +114,7 @@ public class Solution {
                             continue;
                         }
                         if (board[r][c] == 'E') {
+                            //board[r][c] = 'B';
                             updateBoard(board, new int[]{r, c});
                         }
                     }
@@ -166,6 +167,7 @@ public class Solution {
                     continue;
                 }
                 if (board[r][c] == 'E') {
+                    //board[r][c] = 'B';
                     updateBoard(board, new int[]{r, c});
                 }
             }
