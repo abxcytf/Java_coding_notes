@@ -293,4 +293,54 @@ public class Solution {
     }
     
     /******************************************************************************************/
+    private int[] dx = {-1, -1, -1, 0, 0, 1, 1, 1};
+    private int[] dy = {-1, 0, 1, -1, 1, -1, 0, 1};
+    public char[][] updateBoard(char[][] board, int[] click) {
+        int m = board.length;
+        int n = board[0].length;
+        Deque<int[]> queue = new ArrayDeque<>();
+        queue.offerLast(click);
+        
+        while (!queue.isEmpty()) {
+            int[] cell = queue.pollFirst();
+            int row = cell[0];
+            int col = cell[1];
+            
+            if (board[row][col] == 'M') {
+                board[row][col] = 'X';
+                return board;
+            }
+            int count = 0;
+            for (int i = 0; i < 8; i++) {
+                int r = row + dx[i];
+                int c = col + dy[i];
+                if (r < 0 || r >= m || c < 0 || c >= n) {
+                    continue;
+                }
+                if (board[r][c] == 'M') {
+                    count++;
+                }
+            }
+            
+            if (count > 0) {
+                board[row][col] = (char)(count + '0');
+                continue;
+            }
+            board[row][col] = 'B';
+            //if it is a pure 'E', BFS to adjacent cells
+            for (int i = 0; i < 8; i++) {
+                int r = row + dx[i];
+                int c = col + dy[i];
+                if (r < 0 || r >= m || c < 0 || c >= n) {
+                    continue;
+                }
+                if (board[r][c] == 'E') {
+                    //if it is unrevealed
+                    queue.offerLast(new int[]{r, c});
+                    board[r][c] = 'B';
+                }
+            }
+        }
+        return board;
+    }
 }
