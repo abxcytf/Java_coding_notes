@@ -229,6 +229,68 @@ public class Solution {
     }
     
     /************************************************************************************************/
- 
+    //BFS solution
+    public char[][] updateBoard(char[][] board, int[] click) {
+        //Assume all inputs are valid
+        int m = board.length;
+        int n = board[0].length;
+        Deque<int[]> queue = new ArrayDeque<>();
+        queue.offerLast(click);
+        
+        while (!queue.isEmpty()) {
+            int[] cell = queue.pollFirst();
+            int row = cell[0];
+            int col = cell[1];
+            
+            if (board[row][col] == 'M') {
+                //if click on mine, set it to 'X' and game over
+                board[row][col] = 'X';
+                return board;
+            }
+            
+            int count = 0;
+            //to find if the mine existing in the 8 directions
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    int r = row + i;
+                    int c = col + j;
+                    if (r < 0 || r >= m || c < 0 || c >= n) {
+                        continue;
+                    }
+                    if (board[r][c] == 'M') {
+                        count++;
+                    }
+                }
+            }
+            
+            if (count > 0) {
+                //if it is not a 'B', stop further DFS
+                board[row][col] = (char)(count + '0');
+                continue;
+            }
+            board[row][col] = 'B';
+            for (int i = -1 ; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    int r = row + i;
+                    int c = col + j;
+                    if (r < 0 || r >= m || c < 0 || c >= n) {
+                        continue;
+                    }
+                    if (board[r][c] == 'E') {
+                        queue.offerLast(new int[]{r, c});
+                        board[r][c] = 'B'; //Avoid to be added again
+                    }
+                }
+            }
+        }
+        return board;
+    }
     
+    /******************************************************************************************/
 }
