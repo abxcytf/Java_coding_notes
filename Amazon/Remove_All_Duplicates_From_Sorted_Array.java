@@ -19,11 +19,17 @@ public class Solution {
         boolean duplicateFlag = false;
         for (; fast < nums.length; fast++) {
             if (nums[slow] == nums[fast]) {
+                //duplicates detected
+                //set duplicateFlag to true
                 duplicateFlag = true;
             } else if (duplicateFlag) {
+                //it may be a candidate
+                //put into slow position but do not increment slow
+                //set the duplicateFlag back to false to see if it has duplicates
                 nums[slow] = nums[fast];
                 duplicateFlag = false;
             } else {
+                //veried the candidate does not have duplicates, increment slow pointer
                 nums[++slow] = nums[fast];
             }
         }
