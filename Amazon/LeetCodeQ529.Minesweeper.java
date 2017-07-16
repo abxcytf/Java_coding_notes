@@ -102,7 +102,7 @@ public class Solution {
                 board[row][col] = (char)(count + '0');
             } else {
                 // it is a 'B', continue DFS to adjacent cells
-                board[row][col] = 'B';
+                board[row][col] = 'B'; //!!!!!
                 for (int i = -1; i < 2; i++) {
                     for (int j = -1; j < 2; j++) {
                         if (i == 0 && j == 0) {
@@ -158,7 +158,7 @@ public class Solution {
         } else {
             //board[row][col] is a 'E'
             //unreveal it to 'B'
-            board[row][col] = 'B';
+            board[row][col] = 'B'; //!!!!!!
             //continue DFS to adjacent cells
             for (int i = 0; i < 8; i++) {
                 int r = row + dx[i];
@@ -167,7 +167,7 @@ public class Solution {
                     continue;
                 }
                 if (board[r][c] == 'E') {
-                    //board[r][c] = 'B';
+                    //board[r][c] = 'B'; //not necessary
                     updateBoard(board, new int[]{r, c});
                 }
             }
@@ -215,7 +215,7 @@ public class Solution {
         } else {
             //board[row][col] is a 'E'
             //unreveal it to 'B'
-            board[row][col] = 'B';
+            board[row][col] = 'B'; //!!!!
             //continue DFS to adjacent cells
             for (int i = 0; i < 8; i++) {
                 int r = row + dx[i];
