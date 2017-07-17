@@ -52,6 +52,24 @@ public class Solution {
     }
     
     /***********************************************************************************/
-    
-    
+    public List<List<String>> groupStrings(String[] strings) {
+        List<List<String>> result = new ArrayList<>();
+        if (strings == null || strings.length == 0) {
+            return result;
+        } 
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strings) {
+            StringBuilder key = new StringBuilder();
+            for (int i = 0; i < str.length(); i++) {
+                key.append((char)('a'+ (str.charAt(i) - str.charAt(0) + 26) % 26));
+            }
+            if (!map.containsKey(key.toString())) {
+                map.put(key.toString(), new ArrayList<String>());
+            }
+            map.get(key.toString()).add(str);
+        }
+        
+        result = new ArrayList<>(map.values());
+        return result;
+    }
 }
