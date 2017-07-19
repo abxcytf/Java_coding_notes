@@ -87,11 +87,11 @@ public class Solution {
                     //if after the number is 'x', means it belongs to A
                     if (i < n && chars[i] == 'x') {
                         A += sign * num;
-                        i++; //by pass 'x'
                     } else {
+                        //chars[i] is '-' or '+'
                         B += sign * num;
+                        i--; //make sure next round is still on current '+' and '-'
                     }
-                    i--;
                 }
             } else {
                 // chars[i] == 'x'
