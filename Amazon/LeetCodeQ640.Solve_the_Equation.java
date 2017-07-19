@@ -94,7 +94,7 @@ public class Solution {
                     }
                 }
             } else {
-                // chars[i] == 'x'
+                //this is only for cases ...+x or ...-x cases, i currently on x's index
                 A += sign;
             }
         }
