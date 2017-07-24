@@ -18,7 +18,34 @@ Note:
 */
 
 public class Solution {
-    //the idea is from merge intervals, time: O(nlogn), space: O(1)
+    //dp implementation, time O(n^2), space O(n)
+    public int findLongestChain(int[][] pairs) {
+        if (pairs == null || pairs.length == 0) {
+            return 0;
+        }
+    
+        Arrays.sort(pairs, (a, b) -> (a[0] - b[0]));
+        int result = 0;
+        int[] dp = new int[pairs.length];
+        //initialization
+        for (int i = 0; i < pairs.length; i++) {
+            dp[i] = 1;
+        }
+        
+        for (int i = 1; i < pairs.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (pairs[i][0] > pairs[j][1] && dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
+                }
+            }
+            result = Math.max(result, dp[i]);
+        }
+        
+        return result;
+    }
+    
+    /*********************************************************************************************************/
+    //optimized solution, the idea is from merge intervals, time: O(nlogn), space: O(1)
     public int findLongestChain(int[][] pairs) {
         if (pairs == null || pairs.length == 0) {
             return 0;
@@ -35,6 +62,4 @@ public class Solution {
         }
         return result;
     }
-    
-    /*********************************************************************************************************/
 }
