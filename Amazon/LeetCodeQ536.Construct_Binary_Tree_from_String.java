@@ -67,7 +67,7 @@ public class Solution {
     }
        
     /**************************************************************************************************/
-    //iteration implementation   
+    //stack implementation(iteration)   
     public TreeNode str2tree(String s) {
         if (s == null || s.length() == 0) {
             return null;
