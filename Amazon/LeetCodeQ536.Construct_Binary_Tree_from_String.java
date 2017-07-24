@@ -64,4 +64,34 @@ public class Solution {
         }
         return current;
     }
+       
+    /**************************************************************************************************/
+    //iteration implementation   
+    public TreeNode str2tree(String s) {
+        if (s == null || s.length() == 0) {
+            return null;
+        }
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        for (int i = 0, j = i; i < s.length(); i++, j = i) {
+            char ch = s.charAt(i);
+            if (ch == ')') {
+                stack.pollLast();
+            } else if (ch >= '0' && ch <= '9' || ch == '-') {
+                while (i + 1 < s.length() && s.charAt(i + 1) >= '0' && s.charAt(i + 1) <= '9') {
+                    i++;
+                }
+                TreeNode current = new TreeNode(Integer.valueOf(s.substring(j, i + 1)));
+                if (!stack.isEmpty()) {
+                    TreeNode parent = stack.peekLast();
+                    if (parent.left != null) {
+                        parent.right = current;
+                    } else {
+                        parent.left = current;
+                    }
+                }
+                stack.offerLast(current);
+            } 
+        }
+        return stack.isEmpty() ? null : stack.peek();
+    }
 }
