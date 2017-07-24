@@ -46,6 +46,79 @@ public class Solution {
     }
     
     /***************************************************************************************************/
+    //using Array Indexing,
+    //time O(n), space O(n)
+    public int[] findErrorNums(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        int[] count = new int[nums.length + 1];
+        for (int num : nums) {
+            count[num]++;
+        }
+        int duplicated = -1;
+        int missingNumber = -1;
+        for (int i = 1; i < count.length; i++) {
+            if (count[i] == 2) {
+                duplicated = i;
+            }
+            if (count[i] == 0) {
+                missingNumber = i;
+            }
+        }
+        return new int[]{duplicated, missingNumber};
+    }
     
+    /***************************************************************************************************/
+    //put each element k to the k-1 th position 
+    //unless k-1th is occupied by k.
+    //time O(n), space O(1)
+    public int[] findErrorNums(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            while (nums[nums[i] - 1] != nums[i]) {
+                swap(nums, i, nums[i] - 1);
+            }
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != i + 1) {
+                return new int[]{nums[i], i + 1};
+            }
+        }
+        return null;
+    }
     
+    private void swap(int[] nums, int i ,int j) {
+        if (nums[i] != nums[j]) {
+            nums[i] ^= nums[j];
+            nums[j] ^= nums[i];
+            nums[i] ^= nums[j];
+        }
+    }
+    
+    /***************************************************************************************************/
+    //using sign to mark
+    public int[] findErrorNums(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return null;
+        }
+        int[] result = new int[2];
+        for (int i : nums) {
+            if (nums[Math.abs(i) - 1] < 0) {
+                result[0] = Math.abs(i);
+            } else {
+                nums[Math.abs(i) - 1] *= -1;
+            }
+        }
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                result[1] = i + 1;
+            }
+        }
+        return result;
+    }
 }
