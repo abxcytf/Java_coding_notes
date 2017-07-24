@@ -108,6 +108,7 @@ public class Solution {
         int[] result = new int[2];
         for (int i : nums) {
             if (nums[Math.abs(i) - 1] < 0) {
+                //when find negative, means current i is a duplicate
                 result[0] = Math.abs(i);
             } else {
                 nums[Math.abs(i) - 1] *= -1;
@@ -116,6 +117,7 @@ public class Solution {
         
         for (int i = 0; i < nums.length; i++) {
             if (nums[i] > 0) {
+                //if nums[i] > 0 means this number is not correct in current nums
                 result[1] = i + 1;
             }
         }
