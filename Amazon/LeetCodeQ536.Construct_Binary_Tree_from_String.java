@@ -55,6 +55,7 @@ public class Solution {
             } else if (s.charAt(i) == ')') {
                 leftParenCount--;
             }
+            //always start to construct the left child node of the parent first if it exists
             if (leftParenCount == 0 && start == firstParenIndex) {
                 current.left = str2tree(s.substring(start + 1, i));
                 start = i + 1;
@@ -83,6 +84,7 @@ public class Solution {
                 TreeNode current = new TreeNode(Integer.valueOf(s.substring(j, i + 1)));
                 if (!stack.isEmpty()) {
                     TreeNode parent = stack.peekLast();
+                    //always start to construct the left child node of the parent first if it exists
                     if (parent.left != null) {
                         parent.right = current;
                     } else {
