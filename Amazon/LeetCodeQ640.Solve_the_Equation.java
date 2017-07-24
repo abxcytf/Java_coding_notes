@@ -32,6 +32,46 @@ public class Solution {
         if (equation == null || equation.length() == 0) {
             return equation;
         }
+        
+        int[] res = evaluateExpression(equation.split("=")[0]);
+        int[] res2 = evaluateExpression(equation.split("=")[1]);
+        res[0] -= res2[0];
+        res[1] = res2[1] - res[1];
+        if (res[0] == 0 && res[1] == 0) {
+            return "Infinite solutions";
+        } else if (res[0] == 0) {
+            return "No solution";
+        } else {
+            return "x=" + res[1] / res[0];
+        }
+    }
+    
+    private int[] evaluateExpression(String exp) {
+        String [] tokens = exp.split("(?=[-+])"); 
+        //"()" capturing group, "[]" one of the characters in the brackers
+        
+        int[] res = new int[2];
+        for (String token : tokens) {
+            //discuss seperately for the special cases   
+            if  (token.equals("+x") || token.equals("x")) {
+                res[0] += 1;
+            } else if (token.equals("-x")) {
+                res[0] -= 1;
+            } else if (token.contains("x")) {
+                res[0] += Integer.parseInt(token.substring(0, token.indexOf("x")));
+            } else {
+                res[1] += Integer.parseInt(token);
+            } //Integer.parseInt and Integer.valueOf only works on valid number format
+        }
+        return res;
+    }
+    
+    /*******************************************************************************/
+    //optimized solution, for loop scan
+    public String solveEquation(String equation) {
+        if (equation == null || equation.length() == 0) {
+            return equation;
+        }
         String[] parts = equation.split("=");
         //left side of the equation
         String leftSide = parts[0];
