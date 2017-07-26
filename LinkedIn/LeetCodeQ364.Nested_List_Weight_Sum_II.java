@@ -49,10 +49,41 @@ Given the list [1,[4,[6]]], return 17. (one 1 at depth 3, one 4 at depth 2, and 
  */
 public class Solution {
     
-    
+    //BFS implementation
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() == 0) {
+            return 0;
+        }
+        Deque<NestedInteger> queue = new LinkedList<>();
+        int prev = 0;
+        int total = 0;
+        for (NestedInteger nestedInt : nestedList) {
+            queue.offerLast(nestedInt);
+        }
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int levelSum = 0;
+            for (int i = 0; i < size; i++) {
+                NestedInteger current = queue.pollFirst();
+                if (current.isInteger()) {
+                    levelSum += current.getInteger();
+                }
+                List<NestedInteger> nextList = current.getList();
+                if (nextList != null) {
+                    for (NestedInteger next : nextList) {
+                        queue.offerLast(next);
+                    }
+                }
+            }
+            prev += levelSum;
+            total += prev;
+        }
+        return total;
+    }
     
     /*********************************************************************************************/
-    //optimized solution, 时间复杂度如何分析？
+    //same idea as above but optimized solution, 时间复杂度如何分析？
     public int depthSumInverse(List<NestedInteger> nestedList) {
         if (nestedList == null || nestedList.size() == 0) {
             return 0;
