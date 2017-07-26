@@ -49,6 +49,49 @@ Given the list [1,[4,[6]]], return 17. (one 1 at depth 3, one 4 at depth 2, and 
  */
 public class Solution {
     
+    //DFS implementation
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() == 0) {
+            return 0;
+        }
+        int height = dfsHelper(nestedList);
+        int result = getSum(nestedList, height);
+        return result;
+    }
+    
+    //get the height/depth of the solution tree
+    private int dfsHelper(List<NestedInteger> nestedList) {
+        if (nestedList == null || nestedList.size() == 0) {
+            return 0;
+        }
+        int height = 0;
+        for (NestedInteger nestedInt : nestedList) {
+            if (nestedInt.isInteger()) {
+                height = Math.max(height, 1);
+            } else {
+                height = Math.max(height, dfsHelper(nestedInt.getList()) + 1);
+            }
+        }
+        return height;
+    }
+    
+    //dfs recursion to get the sum result
+    private int getSum(List<NestedInteger> nestedList, int height) {
+        if (nestedList == null || nestedList.size() == 0) {
+            return 0;
+        }
+        int sum = 0;
+        for (NestedInteger nestedInt : nestedList) {
+            if (nestedInt.isInteger()) {
+                sum += nestedInt.getInteger() * height;
+            } else {
+                sum += getSum(nestedInt.getList(), height - 1);
+            }
+        }
+        return sum;
+    }
+    
+    /************************************************************************************************************/
     //BFS implementation
     public int depthSumInverse(List<NestedInteger> nestedList) {
         if (nestedList == null || nestedList.size() == 0) {
