@@ -14,6 +14,7 @@ find(7) -> false
 
 public class TwoSum {
     
+    //TLE in the leetCode, but this is quick at finding result
     Map<Integer, Integer> map;
     
     /** Initialize your data structure here. */
