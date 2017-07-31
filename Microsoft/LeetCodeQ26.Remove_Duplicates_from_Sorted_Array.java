@@ -28,4 +28,24 @@ public class Solution {
         
         return index + 1;  //index is current the last index, +1 becomes the length
     }
+    
+    /*************************************************************************************************/
+    //two pointers, before i(not included is processed)
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int i = 0;
+        int j = 0;
+        while (j < nums.length) {
+            while (j > 0 && j < nums.length && nums[j] == nums[j - 1]) {
+                j++;
+            }
+            if (j >= nums.length) {
+                break;
+            }
+            nums[i++] = nums[j++];
+        }
+        return i;
+    }
 }
