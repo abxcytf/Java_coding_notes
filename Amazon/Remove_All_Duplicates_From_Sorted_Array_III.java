@@ -35,4 +35,29 @@ public class Solution {
         }
         return duplicateFlag ? slow : slow + 1;
    }
+   
+   /******************************************************************************************/
+   public static int removeDuplicatedIII(int[] nums) {
+     if (nums == null || nums.length == 0) {
+       return 0;
+     }
+    
+    int i = 0;
+    int j = 0;
+    
+    while (j < nums.length) {
+      while (j < nums.length - 1 && nums[j] == nums[j + 1]) {
+        j++;
+      }
+      if (j >= nums.length) {
+        break;
+      }
+      if (j > 0 && nums[j] == nums[j - 1]) {
+         j++;
+      } else {
+        nums[i++] = nums[j++];
+      }
+    }
+    return i;
+  }
 }
