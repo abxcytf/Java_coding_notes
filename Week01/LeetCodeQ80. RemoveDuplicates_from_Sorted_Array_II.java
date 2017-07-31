@@ -50,4 +50,35 @@ public class Solution {
         }
         return i;
     }
+    
+    /**********************************************************************************************************/
+    public int removeDuplicates(int[] nums) {
+        return duplicatesAllowedAtMostKTimes(nums, 2);
+    }
+    
+    private int duplicatesAllowedAtMostKTimes(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        if (k >= nums.length) {
+            return nums.length;
+        }
+        int i = 1;
+        int j = 1;
+        int count = 1;
+        while (j < nums.length) {
+            if (nums[j] != nums[j - 1]) {
+                count = 1;
+                nums[i++] = nums[j];
+            } else {
+                if (count < k) {
+                    nums[i++] = nums[j];
+                    count++;
+                }
+            }
+            j++;
+        }
+        return i;
+    }
 }
