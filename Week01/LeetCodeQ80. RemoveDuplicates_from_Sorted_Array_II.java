@@ -27,4 +27,27 @@ public class Solution {
         }
         return start;
     }
+    
+    /********************************************************************************************************/
+    //two pointers, i is the location of the processed(not included)
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        
+        int i = 0;
+        int j = 0;
+        
+        while (j < nums.length) {
+            while (j > 1 && i > 1 && j < nums.length && nums[j] == nums[i - 1] && nums[j] == nums[i - 2] ) { 
+                j++;
+            }
+            
+            if (j >= nums.length) {
+                break;
+            }
+            nums[i++] = nums[j++];
+        }
+        return i;
+    }
 }
