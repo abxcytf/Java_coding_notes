@@ -70,6 +70,7 @@ public class Solution {
     private int backtrack(TreeNode root, int sum, int target, Map<Integer, Integer> map) {
         if (root == null) return 0;
         sum += root.val;
+        //cooresponding to the map.put(0, 1); 
         int res = map.getOrDefault(sum - target, 0); //see if there is a subtree sum equals to target
         map.put(sum, map.getOrDefault(sum, 0) + 1);
         //extend to left and right child
