@@ -4,7 +4,7 @@ Follow Up I - Subsection of complete path from root to leaf
 
 
 public class Solution {
-    public int pathSum(TreeNode root, int sum) {
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
         List<List<Integer>> result = new ArrayList<>();
         dfsHelper(root, sum, result, new ArrayList<Integer>());
         return result;
