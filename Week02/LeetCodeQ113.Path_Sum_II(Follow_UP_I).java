@@ -16,14 +16,14 @@ public class Solution {
         }
         
         path.add(root.val);
-        updatedResult(sum, path, result);
+        updateResult(sum, path, result);
 
         dfsHelper(root.left, sum, result, path);
         dfsHelper(root.right, sum, result, path);
         path.remove(path.size() - 1);
     }
     
-    private void updatedResult(int target, List<Integer> path, List<List<Integer>> result) {
+    private void updateResult(int target, List<Integer> path, List<List<Integer>> result) {
         List<Integer> temp = new ArrayList<>();
         for (int i = path.size() - 1; i >= 0; i--) {
             temp.add(path.get(i));
