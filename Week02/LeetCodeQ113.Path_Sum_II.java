@@ -51,4 +51,31 @@ public class Solution {
         sum += root.val;
         answer.remove(answer.size() - 1);
     }
+  
+    /**********************************************************************************************************/
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfsHelper(root, sum, result, new ArrayList<Integer>());
+        
+        return result;
+    }
+    
+    private void dfsHelper(TreeNode root, int sum, List<List<Integer>> result, List<Integer> path) {
+        if (root == null) {
+            return;
+        }
+        
+        path.add(root.val);
+        
+        if (sum == root.val && root.left == null && root.right == null) {
+            //only check at leaf node
+            result.add(new ArrayList<>(path));
+            //return;
+        } else {
+            dfsHelper(root.left, sum - root.val, result, path);
+            dfsHelper(root.right, sum - root.val, result, path);
+        }
+        
+        path.remove(path.size() - 1);
+    }
 }
