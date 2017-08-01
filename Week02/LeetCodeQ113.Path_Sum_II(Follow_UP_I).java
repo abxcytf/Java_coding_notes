@@ -16,12 +16,10 @@ public class Solution {
         }
         
         path.add(root.val);
-        if (root.left == null && root.right == null) {
-            updatedResult(sum, path, result);
-        } else {
-            dfsHelper(root.left, sum, result, path);
-            dfsHelper(root.right, sum, result, path);
-        }
+        updatedResult(sum, path, result);
+
+        dfsHelper(root.left, sum, result, path);
+        dfsHelper(root.right, sum, result, path);
         path.remove(path.size() - 1);
     }
     
