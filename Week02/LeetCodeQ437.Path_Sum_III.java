@@ -68,14 +68,17 @@ public class Solution {
     
     //Backtrack one pass
     private int backtrack(TreeNode root, int sum, int target, Map<Integer, Integer> map) {
-        if (root == null) return 0;
+        if (root == null) {
+            return 0;
+        }
         sum += root.val;
         //cooresponding to the map.put(0, 1); 
-        int res = map.getOrDefault(sum - target, 0); //see if there is a subtree sum equals to target
-        map.put(sum, map.getOrDefault(sum, 0) + 1);
+        int result = map.getOrDefault(sum - target, 0); //see if there is a node value equals to target
+        map.put(sum, map.getOrDefault(sum, 0) + 1); //add 1 to current sum count
         //extend to left and right child
-        res += backtrack(root.left, sum, target, map) + backtrack(root.right, sum, target, map);
+        result += backtrack(root.left, sum, target, map) + backtrack(root.right, sum, target, map);
+        //remove 1 to sum current sum count;
         map.put(sum, map.getOrDefault(sum, 0) - 1); //remove the current node so it wont affect other path
-        return res;
+        return result;
     }
 }
