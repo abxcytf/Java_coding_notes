@@ -45,7 +45,9 @@ public class Solution {
     private int findPath(TreeNode root, int sum) {
         int result = 0;
         if (root == null) return result;
-        if (sum == root.val) result++;
+        if (sum == root.val) {
+            result++;
+        }
         result += findPath(root.left, sum - root.val);
         result += findPath(root.right, sum - root.val);
         return result;
