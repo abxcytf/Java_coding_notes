@@ -4,7 +4,7 @@ Follow Up III: Path -> Any node to any other node
 
 public class Solution {
     //time complexity: O(n), space complexity O(1)
-    public int maxPathSum(TreeNode root, int sum) {
+    public int maxPathSum(TreeNode root) {
         int[] max = {Integer.MIN_VALUE};
         dfsHelper(root, max);
         return max[0];
