@@ -103,4 +103,21 @@ public class Solution {
         }
         return sb.toString();
     }
+    
+    //recursion serialization
+    private String generatePreorderString(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        generatePreorderString_recursion(root, sb);
+        return sb.toString();
+    }
+    
+    private void generatePreorderString_recursion(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            sb.append(",#");
+            return;
+        }
+        sb.append("," + root.val);
+        generatePreorderString_recursion(root.left, sb);
+        generatePreorderString_recursion(root.right, sb);
+    } 
 }
