@@ -73,4 +73,34 @@ public class Solution {
         
         return isSame(s.left, t.left) && isSame(s.right, t.right);
     }
+     
+     
+    /***********************************************************************************************/
+    //idea: serial tree into string and compare
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        String sPreorder = generatePreorderString(s);
+        String tPreorder = generatePreorderString(t);
+        if (s == null || t == null) {
+            return false;
+        }
+        return sPreorder.contains(tPreorder);
+    }
+    
+    private String generatePreorderString(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        //LinkedList can host null, ArrayDeque can not
+        Deque<TreeNode> stack = new LinkedList<>();
+        stack.offerLast(root);
+        while (!stack.isEmpty()) {
+            TreeNode current = stack.pollLast();
+            if (current == null) {
+                sb.append(",#");
+            } else {
+                sb.append("," + current.val);
+                stack.offerLast(current.right);
+                stack.offerLast(current.left);
+            }
+        }
+        return sb.toString();
+    }
 }
