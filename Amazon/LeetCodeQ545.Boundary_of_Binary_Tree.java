@@ -118,4 +118,40 @@ public class Solution {
         leaves(root.left);
         leaves(root.right);
     }
+    
+    /********************************************************************************************/
+    //only 1 pass dfs for root.left and root.right
+    public List<Integer> boundaryOfBinaryTree(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        result.add(root.val);
+        dfsHelper(root.left, true, false, result);
+        dfsHelper(root.right, false, true, result);
+        
+        return result;
+    }
+    
+    private void dfsHelper(TreeNode root, boolean isLeft, boolean isRight, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
+        
+        if (root.left == null && root.right == null) {
+            result.add(root.val);
+            return; //return at leaf node
+        }
+        
+        if (isLeft) {
+            result.add(root.val);
+        }
+        
+        dfsHelper(root.left, isLeft, isRight && root.right == null, result);
+        dfsHelper(root.right, isLeft && root.left == null, isRight, result);
+        
+        if (isRight) {
+            result.add(root.val);
+        }
+    }
 }
