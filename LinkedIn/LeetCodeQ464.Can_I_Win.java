@@ -62,6 +62,7 @@ class Solution {
             }
             
             if (!canIWin(total - (i + 1), n, state | (1 << i), cache)) {
+                //another player(play 2) can not win
                 cache.put(state, true);
                 return true;
             }
