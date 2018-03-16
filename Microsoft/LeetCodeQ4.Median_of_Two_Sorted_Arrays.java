@@ -45,6 +45,8 @@ public class Solution {
         // find the value of (k/2)th value in A
         int AKey = (AStart +  k / 2 - 1 < A.length) ? A[AStart + k / 2 - 1] : Integer.MAX_VALUE;
         
+        //note: if AStart + k / 2 - 1 >= A.length, which mean A run out, the answer have to be in B, so make AKey max_value
+        
         //find the value of (k/2)th value in B
         int BKey = (BStart + k / 2 - 1 < B.length) ? B[BStart + k / 2 - 1] : Integer.MAX_VALUE;
         
