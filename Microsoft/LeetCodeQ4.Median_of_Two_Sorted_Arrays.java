@@ -48,10 +48,10 @@ public class Solution {
         //find the value of (k/2)th value in B
         int BKey = (BStart + k / 2 - 1 < B.length) ? B[BStart + k / 2 - 1] : Integer.MAX_VALUE;
         
-        if (AKey < BKey) { //get rid of the ones between [Astart, AStart + k / 2]
+        if (AKey < BKey) { //get rid of the ones between index [Astart, AStart + k / 2 - 1] inclusive in A
             return findKth(A, AStart + k / 2, B, BStart, k - k / 2);
         } else {
-            //get rid of the ones between [BStart, BStart + k / 2]
+            //get rid of the ones between index [BStart, BStart + k / 2 - 1] inclusive in B
             return findKth(A, AStart, B, BStart + k / 2, k - k / 2);
         }
     }
