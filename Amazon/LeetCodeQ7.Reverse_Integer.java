@@ -25,16 +25,18 @@ class Solution {
         int result = 0;
         
         while (x != 0) {
-            int digit = result * 10 + x % 10;
+            int temp = result * 10 + x % 10;
             x /= 10;
             
-            //prevention overflow, e.g. 2,147,483,647
-            if (digit / 10  != result) {
+            // prevention overflow, e.g. 2,147,483,647
+            // when temp value is greater than the Integer_MAX, 
+            // then temp / 10 will not equal to the previous value anymore
+            if (temp / 10  != result) {
                 result = 0;
                 break;
             }
             
-            result = digit;
+            result = temp;
         }
         return result;
     }
