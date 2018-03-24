@@ -34,4 +34,26 @@ public class Solution {
         return num;
     }
     return 1 + (num - 1) % 9;
+    
+    /**************************************************************/
+    public int addDigits(int num) {
+        //input is a non-negative num
+        if (num >= 0 && num <= 9) {
+            //num is only single digit, so return it
+            return num;
+        }
+        
+        while (!(num >= 0 && num <= 9)) {
+            //the ending condition of the loop is num is single digit
+            int digitalSum = 0;
+            
+            while (num > 0) {
+                digitalSum += num % 10;
+                num /= 10;
+            }
+            num = digitalSum;
+        }
+        
+        return num;
+    }
 }
