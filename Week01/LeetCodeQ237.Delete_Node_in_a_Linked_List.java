@@ -19,7 +19,11 @@ Show Similar Problems
  */
 public class Solution {
     public void deleteNode(ListNode node) {
-        if (node == null) return;
+        if (node == null) {
+            return;
+        } 
+        
+        //the node is not the tail, so its next node must be valid
         node.val = node.next.val;
         node.next = node.next.next;
     }
